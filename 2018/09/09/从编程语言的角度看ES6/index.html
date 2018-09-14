@@ -157,10 +157,6 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/前端" title='前端'>
-                        前端
-                    </a>
-                
             
         </span>
     </span>
@@ -354,11 +350,11 @@
 </ul>
 <p><strong>参数默认值</strong></p>
 <ul>
-<li>ES6的函数允许使用函数默认参数值，参数默认值可以是原始值/引用值或者函数执行的结果。如function ajax(method = ‘GET’, url, callbacks, data, async = true) { … }</li>
+<li>ES6+的函数允许使用函数默认参数值，参数默认值可以是原始值/引用值或者函数执行的结果。如function ajax(method = ‘GET’, url, callbacks, data, async = true) { … }</li>
 <li>函数的默认参数值拥有其自身的作用域和暂时性死区，与函数的作用域相隔离，这意味着参数默认值不允许访问函数体内的任何函数细节。</li>
 </ul>
 <p><strong>箭头函数</strong></p>
-<p>在ES6中函数的行为被[[Call]]和[[Construct]]方法所定义，[[Call]]对应普通函数的执行，[[Construct]]对应使用了new的调用。new.target元属性能判断函数被调用时是否使用了new。</p>
+<p>在ES6+中函数的行为被[[Call]]和[[Construct]]方法所定义，[[Call]]对应普通函数的执行，[[Construct]]对应使用了new的调用。new.target元属性能判断函数被调用时是否使用了new。</p>
 <ul>
 <li>箭头函数没有[[Construct]]内部属性，不能被使用new调用，即不能作为构造函数;</li>
 <li>箭头函数没有prototype属性。</li>
@@ -368,7 +364,7 @@
 <li>如果箭头函数想返回一个对象字面量，必须将该对象用()包裹，如 const def = item =&gt; ({ id : item.id })</li>
 </ul>
 <h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><hr>
-<p><code>在编程中能被当做值来使用就称为一等公民，意味着它能作为参数传给函数、能作为函数返回值、能用来给变量赋值。ES6中类和函数都是一等公民。</code></p>
+<p>在编程中能被当做值来使用就称为一等公民，意味着它能作为参数传给函数、能作为函数返回值、能用来给变量赋值。<br><code>在ES6+中类和函数都是一等公民。</code></p>
 <ol>
 <li>类声明与类表达式都不会被提升。</li>
 <li>类的所有方法都是不可枚举的。</li>
@@ -390,7 +386,7 @@
 <ol>
 <li>Common.js规范最初用于服务端Node.js,其核心思想是通过require方法来 <strong>同步加载</strong>(因为服务器文件存储在硬盘中,读取速度快)需要依赖的其他模块,通过module.exports导出需要暴露的接口。浏览器不兼容Common.js。</li>
 <li>AMD/CMD规范采用 <strong>异步加载</strong>,均适用于浏览器。AMD(如Require.js)依赖前置,提前加载依赖;CMD(如Sea.js)就近加载,按需加载。</li>
-<li>ES6自带模块化,使用import引入模块,使用export导出模块。<ul>
+<li>ES6+自带模块化,使用import引入模块,使用export导出模块。<ul>
 <li>完全导入一个文件的导出模块。如import * as example from ‘url’; example.func();</li>
 <li>重命名导出和导入。如export { app as App }/import { App as app } from url</li>
 <li>每个模块只能设置一个默认导出。</li>
