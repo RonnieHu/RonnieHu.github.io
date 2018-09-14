@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>从编程语言的角度看ES6+ | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/javascript.png">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Ronnie Hu'>
+            <img src="/img/zero.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>
+            
+                 <img src="/img/slogan.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/前端/"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/后端/"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/工具/"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/综合/"><i class="fa "></i>综合</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="从编程语言的角度看ES6+">
+            
+	            从编程语言的角度看ES6+
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/前端" title='前端'>
+                        前端
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/09/09</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1995年，JavaScript之父Brendan Eich用十天的时间设计了这门动态脚本语言。经过两次浏览器大战，二十余年的发展，JavaScript早已在web前端领域占统治地位，其势力向后端、桌面应用、App开发等领域迅速扩张。<br>Node.js使JavaScript可以在后端运行，他的单线程事件循环、异步回调的特性也让其在I/O密集型服务(中间层)大展身手；我们熟悉的VS Code就是JavaScript的静态进化版本TypeScript写就的；React Native、Hybrid也给App开发提供了新思路。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><hr>
+<p><strong>原型链</strong></p>
+<p>JavaScript的对象会在内部初始化一个prototype属性。当我们访问一个对象的属性/方法时,如果这个对象内部不存在这个属性/方法,那么它会到这个对象的prototype上去寻找这个属性/方法,如果仍然没有找到,它会继续沿prototype向前查找,直到尽头,这就是原型链。<br><code>instance.constructor.prototype = instance.__proto__</code></p>
+<p><strong>函数的作用域链</strong></p>
+<p>当一个局部函数查找某一属性/方法时,在当前作用域没有找到,就会上溯到上层作用域寻找,直到全局作用域,这就是作用域链。应用有闭包属性。<br>一个函数无法获取其局部函数的内部细节,而局部函数可以获取其上层的函数细节,直至全局作用域。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><hr>
+<p>JavaScript的数据类型分成引用值和原始值两种类型，其中原始值由于占据空间小、大小固定和频繁操作所以被使用 <strong>栈</strong> 存储，引用值由于占据空间大、大小不固定，所以用 <strong>堆</strong> 存储，引用值在栈中存放指针，指针指向堆实体的起始位置。</p>
+<ul>
+<li>原始值包括均为浮点数的Number类型、Boolean类型、String类型、undefined、null和Symbol类型。</li>
+<li>引用值包括Object类型、Array类型、Function类型、Set类型和Map类型等。</li>
+</ul>
+<h2 id="let-const-var"><a href="#let-const-var" class="headerlink" title="let/const/var"></a>let/const/var</h2><hr>
+<p>在ES6之前，JavaScript使用var进行变量声明，使用var声明的变量会出现变量的声明提升的现象，在全局环境下声明的变量还会绑定在window对象上。</p>
+<p>ES6提出了更严谨的声明关键字let和const，让代码更严谨，不易出现错误。let和const均作用于代码块，不存在变量声明提升，未声明的区域会产生局域性死区(TDZ)，禁止重复声明同一个变量，在全局环境下用let或const声明的变量不会绑定到window上。此外，用const声明的常量必须在声明时就赋值。</p>
+<p><strong>最佳实践：</strong>最佳实践：在默认情况下使用const(即使是引用值)，在知道变量需要被更改的时候使用let(如for/while循环体)，在全局作用域下的变量需要能被window访问时使用var。</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><hr>
+<ul>
+<li>从ES6起，字符串数据类型也是可迭代的，可以通过for-of迭代字符串的每一个字符。如for (let i of str) { console.log(i) }<br>可以通过字符串的Symbol.iterator方法创建字符串迭代器。如const iterator = str[Symbol.iterator]();iterator.next()</li>
+<li>字符串新增表示方法 <strong>模板字符串</strong>,可以实现表示多行字符串，在字符串内内嵌表达式等功能。如const str = `this is a string created by ${name}`。模板字符串本身也是JS表达式，同样可以在${}继续嵌套模板字符串。</li>
+<li>常用字符串方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str.charCodeAt(n)</td>
+<td>返回第n位的Unicode编码</td>
+</tr>
+<tr>
+<td>str.indexOf(‘s’, n)</td>
+<td>从第n位查找子字符串s，如果n省略则从头查找，最终返回s在str中的位置</td>
+</tr>
+<tr>
+<td>str.match(reg)</td>
+<td>匹配正则表达式</td>
+</tr>
+<tr>
+<td>str.replage(reg, ‘new’)</td>
+<td>用new字符串替换匹配到的子字符串</td>
+</tr>
+<tr>
+<td>str.slice(m, n)</td>
+<td>从第m位截取字符串，如果没有n，则截取到字符串末尾</td>
+</tr>
+<tr>
+<td>str.split(substr)</td>
+<td>返回括号内字符分割后的字符串组成的数组，若括号内为空字符串，则返回字符串元素构成的数组。如const str = ‘a~b~c’;str.split(‘~’);返回[‘a’,’b’,’c’]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数组-Set-Map"><a href="#数组-Set-Map" class="headerlink" title="数组/Set/Map"></a>数组/Set/Map</h2><hr>
+<ul>
+<li>ES6添加了Set和Map两种数据类型，他们和数组同属于集合对象类型，这三种数据类型均 <strong>可以迭代</strong>，可以使用for-of遍历他们的子元素和应用他们自身的Symbol.iterator属性创建迭代器。</li>
+<li><p>Set是无重复的有序列表。可以使用set进行 <strong>数组去重</strong>。如const arr = [1, 1, 3, 5];const set = new Set(arr);const newArr = […set]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const set = new Set();</span><br><span class="line">set.add(&apos;str&apos;);</span><br><span class="line">set.delete(&apos;str&apos;);</span><br><span class="line">set.has(&apos;set&apos;) //return false;</span><br><span class="line">set.size //return 0;</span><br><span class="line">set.clear() //清空set;</span><br><span class="line">set.forEach(item =&gt; console.log(item)) //set有forEach方法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Map是有序键值对，其中键允许是任何类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const map = new Map();</span><br><span class="line">map.set(&apos;bookname&apos;, &apos;Understanding ES6&apos;);</span><br><span class="line">map.has(&apos;bookname&apos;);</span><br><span class="line">map.get(&apos;bookname&apos;);</span><br><span class="line">map.size //return 1;</span><br><span class="line">map.delete(&apos;bookname&apos;);</span><br><span class="line">map.clear() //清空map;</span><br><span class="line">map.forEach(item =&gt; console.log(item)) //map也有forEach方法，返回键值对的值</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WeakSet的出现是为了解决Set在设置原始引用为空的情况下仍持有原始引用而造成的内存泄漏的问题。该类型只允许存储引用值弱引用，不允许存储基本值类型。<br>WeakMap与WeakSet类似，均存储引用值弱引用，WeakSet的键必须是对象，而这些对象是弱引用，不会阻止对象实体的GC。WeakMap的最佳用武之地是在浏览器中创建一个关联到特定DOM元素的对象。</p>
+</li>
+<li>常用数组方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arr.push()/pop()/shift()/unshift()</td>
+<td>栈与队列操作，改变原数组</td>
+</tr>
+<tr>
+<td>arr.reverse()/sort()/splice()</td>
+<td>翻转/排序/插入删除替换操作，改变原数组</td>
+</tr>
+<tr>
+<td>arr.join(str)</td>
+<td>str.split(substr)的逆向方法</td>
+</tr>
+<tr>
+<td>arr.reduce()</td>
+<td>数组归并方法</td>
+</tr>
+<tr>
+<td>arr.map()</td>
+<td>对每项进行函数操作，使用返回值构成的数组作为结果</td>
+</tr>
+<tr>
+<td>arr.forEach()</td>
+<td>对每项进行void类型的函数操作，不能有返回值</td>
+</tr>
+<tr>
+<td>arr.filter()</td>
+<td>返回符合条件的子项组成的数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><hr>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object.create()</td>
+<td>创建一个指定原型和若干指定属性的对象</td>
+</tr>
+<tr>
+<td>Object.assign()</td>
+<td>深拷贝</td>
+</tr>
+<tr>
+<td>Object.keys()</td>
+<td>返回对象的可枚举属性组成的数组</td>
+</tr>
+<tr>
+<td>Object.is()</td>
+<td>运算结果与’===’相同，但它认为+0与-0不相等，NaN与NaN相等</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Symbol与迭代器-生成器"><a href="#Symbol与迭代器-生成器" class="headerlink" title="Symbol与迭代器/生成器"></a>Symbol与迭代器/生成器</h2><hr>
+<p><strong>Symbol</strong></p>
+<ul>
+<li>Symbol最初被设计用于对象私有成员。如const sth = Symbol(‘sth’);const o = { [sth] () { return ‘private method’ } }; o[sth]();</li>
+<li>Symbol的局域创建方法，const sym = Symbol(‘description’);<br>Symbol的共享创建方法，const sym = Symbol.for(‘description’);此时使用 Symbol.keyFor(‘description’)查找全局注册表上的符号值。</li>
+<li>Symbol.iterator属性可以返回迭代器，也可以用于创建可迭代对象。</li>
+</ul>
+<p><strong>迭代器/生成器</strong></p>
+<p>可以使用迭代器/生成器的特性进行 <strong>异步操作</strong>。</p>
+<p>迭代器是被设计专门用于迭代的对象，带有特定接口。迭代器对象都有一个next()方法，返回一个结果对象，该对象有一个对应下一个值的value，以及一个布尔类型的done，done值为true时表示没有更多值可供使用。</p>
+<p>生成器是能返回一个迭代器的函数，生成器函数由放在function关键字之后的一个*表示，并能使用新的yield关键字。yield因为无法穿越函数边界，必须严格的处于生成器函数的函数作用域内部，在更深层的子函数作用域内部都是语法错误。另外不能使用箭头函数创建生成器。</p>
+<p>可迭代对象是包含Symbol.iterator属性的对象，所有数组，Set，Map，字符串都是可迭代对象，for-of用于迭代可迭代对象，拿到值。可以使用Symbol.iterator访问对象上的默认迭代器。如const val = [1,2,3,4]; const iterator = val[Symbol.iterator](); iterator.next();</p>
+<p>创建一个简单的可迭代对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const o = &#123;</span><br><span class="line">    items : [],</span><br><span class="line">    *[Symbol.iterator] () &#123;</span><br><span class="line">        for (let item of this.items) &#123;</span><br><span class="line">            yield item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="解构赋值和剩余项"><a href="#解构赋值和剩余项" class="headerlink" title="解构赋值和剩余项"></a>解构赋值和剩余项</h2><hr>
+<p><strong>解构赋值</strong></p>
+<ul>
+<li>解构赋值必须初始化，等号右边不能为undefined或null。</li>
+<li>可以设置默认解构值。如const arr = [‘red’]; const [fir, sec = ‘yellow’] = arr;</li>
+<li>可以使用解构赋值 <strong>互换变量值</strong>。如[a, b] = [b, a];</li>
+<li>解构赋值还可用于函数的 <strong>参数解构</strong>。如function ajax({ method = ‘GET’, url, data, async = true }) { … }; const options = { method : ‘GET’, url : ‘url’, data : null, async : true }; ajax(options);</li>
+</ul>
+<p><strong>剩余项</strong></p>
+<ul>
+<li>当解构引用值时，可以使用剩余项表示剩余的参数。如const info = { name : ‘ronnie’, age : 20 }; const {name, …others} = info;</li>
+<li>可以 <strong>用剩余项深拷贝引用值</strong>。如const colors = [‘red’, ‘orange’, ‘yellow’]; const […copyColors] = colors;</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
+<p><strong>剩余参数</strong></p>
+<p>函数的剩余参数把多个独立的参数合并到一个数组中。如function def (…arg[0]) { return arg[0] };def(1,2,4) //return 4</p>
+<ul>
+<li>一个函数只能有一个剩余参数，而且必须放在最后。</li>
+<li>剩余参数不能在对象字面量的setter中使用。</li>
+</ul>
+<p><strong>扩展运算符</strong></p>
+<ul>
+<li>扩展运算符允许把一个数组分割，并将各个项作为分离的参数传给函数。如const arr = [1,2,4,8]; Math.max(…arr);</li>
+<li>可以将扩展运算符和其他参数混用。如const arr = [1,2,4,8];Math.max(…arr, 10);</li>
+</ul>
+<p><strong>参数默认值</strong></p>
+<ul>
+<li>ES6的函数允许使用函数默认参数值，参数默认值可以是原始值/引用值或者函数执行的结果。如function ajax(method = ‘GET’, url, callbacks, data, async = true) { … }</li>
+<li>函数的默认参数值拥有其自身的作用域和暂时性死区，与函数的作用域相隔离，这意味着参数默认值不允许访问函数体内的任何函数细节。</li>
+</ul>
+<p><strong>箭头函数</strong></p>
+<p>在ES6中函数的行为被[[Call]]和[[Construct]]方法所定义，[[Call]]对应普通函数的执行，[[Construct]]对应使用了new的调用。new.target元属性能判断函数被调用时是否使用了new。</p>
+<ul>
+<li>箭头函数没有[[Construct]]内部属性，不能被使用new调用，即不能作为构造函数;</li>
+<li>箭头函数没有prototype属性。</li>
+<li>箭头函数不能更改this，不能使用bind()/call()/apply()改变其this指向。</li>
+<li>箭头函数的this绑定在最近的父级对象(最大的父级对象为window)上。</li>
+<li>如果箭头函数没有任何参数，那么声明时必须使用一对空括号，如 const fc = () =&gt; ‘nothing you know’</li>
+<li>如果箭头函数想返回一个对象字面量，必须将该对象用()包裹，如 const def = item =&gt; ({ id : item.id })</li>
+</ul>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><hr>
+<p><code>在编程中能被当做值来使用就称为一等公民，意味着它能作为参数传给函数、能作为函数返回值、能用来给变量赋值。ES6中类和函数都是一等公民。</code></p>
+<ol>
+<li>类声明与类表达式都不会被提升。</li>
+<li>类的所有方法都是不可枚举的。</li>
+<li>类的所有方法内部都没有[[construct]]属性,不能使用new构建实例。</li>
+<li>调用类构造器不能使用new,否则报错。</li>
+<li>试图在类内重写类名，会报错。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class demo &#123;</span><br><span class="line">    constructor () &#123;</span><br><span class="line">        this.items = []</span><br><span class="line">    &#125;</span><br><span class="line">    get sayName () &#123;</span><br><span class="line">        console.log(this.name)</span><br><span class="line">    &#125;</span><br><span class="line">    set setName (name) &#123;</span><br><span class="line">        this.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    *createIterator () &#123;</span><br><span class="line">        yield 1</span><br><span class="line">        yield 2</span><br><span class="line">        yield 3</span><br><span class="line">    &#125;</span><br><span class="line">    *[Symbol.iterator] () &#123;</span><br><span class="line">        yield *this.items</span><br><span class="line">    &#125;</span><br><span class="line">    static staticMethod () &#123;</span><br><span class="line">        return &apos;this is a static method&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const DEMO = new demo()</span><br><span class="line"></span><br><span class="line">DEMO.setName = &apos;ronnie&apos;</span><br><span class="line">DEMO.getName  // return &apos;ronnie&apos; </span><br><span class="line"></span><br><span class="line">const iterator = sd.createIterator()</span><br><span class="line">iterator.next()  // return &#123;value: 1, done: false&#125;</span><br><span class="line"></span><br><span class="line">DEMO.items.push(1)</span><br><span class="line">DEMO.items.push(2)</span><br><span class="line">for (let i of DEMO) &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">&#125; // return 1 \n 2</span><br><span class="line"></span><br><span class="line">demo.staticMethod()  // return &apos;this is a static method&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><hr>
+<p>Promise的生命周期为pending =&gt; fulfilled/rejected。</p>
+<p>Promise调度被置入JavaScript引擎作业队列，另有一个事件作业队列追踪Promise的状态，以保证完成或拒绝函数在适当时候执行。</p>
+<p>ES6监控多个Promise的方法：Promise.all()/Promise.race()</p>
+<ol>
+<li>Promise.all()接受单个可迭代对象(如数组)作为参数，并返回一个Promise，这个可迭代对象的元素都是Promise。只有他们都完成时，所返回的Promise才会被完成；任意一个Promise参数失败时，所返回的Promise都会被拒绝。如const p4 = Promise.all([p1, p2, p3]); p4.then(function () { … }).catch(function () { … })</li>
+<li>Promise.race()同样接受单个由promise组成的可迭代对象，并返回一个新的Promsie,但只要一个对象中一个promise被解决(成功或者失败)，所返回的新promise就会立即被解决。如const p4 = Promise.race([p1, p2, p3]); p4.then(function () { … }).catch(function () { … })</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    if (xxx) &#123;</span><br><span class="line">        reject(&apos;error&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">    resolve(&apos;val&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">promise.then(val =&gt; console.log(val)).catch(err =&gt; console.log(err))</span><br></pre></td></tr></table></figure>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><hr>
+<ol>
+<li>Common.js规范最初用于服务端Node.js,其核心思想是通过require方法来 <strong>同步加载</strong>(因为服务器文件存储在硬盘中,读取速度快)需要依赖的其他模块,通过module.exports导出需要暴露的接口。浏览器不兼容Common.js。</li>
+<li>AMD/CMD规范采用 <strong>异步加载</strong>,均适用于浏览器。AMD(如Require.js)依赖前置,提前加载依赖;CMD(如Sea.js)就近加载,按需加载。</li>
+<li>ES6自带模块化,使用import引入模块,使用export导出模块。<ul>
+<li>完全导入一个文件的导出模块。如import * as example from ‘url’; example.func();</li>
+<li>重命名导出和导入。如export { app as App }/import { App as app } from url</li>
+<li>每个模块只能设置一个默认导出。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/08/30/OOP-FP/" class="next-post btn btn-default" title='OOP & FP'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">OOP & FP</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#let-const-var"><span class="toc-text">let/const/var</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组-Set-Map"><span class="toc-text">数组/Set/Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Symbol与迭代器-生成器"><span class="toc-text">Symbol与迭代器/生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解构赋值和剩余项"><span class="toc-text">解构赋值和剩余项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块化"><span class="toc-text">模块化</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
