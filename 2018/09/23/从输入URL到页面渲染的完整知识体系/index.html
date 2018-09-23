@@ -180,7 +180,169 @@
     </div>
     
     <div class="post-body post-content">
-        
+        <p>作为一名工程师需要有自己完整的知识体系，能够运用知识和经验解决问题。在前端的世界里，工程师需要了解浏览器、计算机网络、数据结构与算法、web安全等方方面面的知识内容。本文尝试通过从输入URL到页面渲染的全过程，梳理出前端工程知识体系的一部分。</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>当我们想访问一个网站时，我们首先打开一个空白的网页。在这个过程中，浏览器的工作原理是值得我们关注的。</p>
+<p><strong>多进程的浏览器</strong></p>
+<p>浏览器是多进程的，每一个标签页都是一个单独的Renderer进程。如果浏览器运行在一个进程上，那么当一个标签页失去响应时，所有标签页都会失去响应；反之如果浏览器是多进程的，那么当我们关闭掉失去响应的标签页时，其他的标签页仍然可以正常工作。另外，把浏览器的工作分成多个进程也具有安全化和沙箱化的优点，实现不同标签页的cookie等内容的独立。<br>除了每个标签页的Renderer进程，浏览器也具有其他进程来完成纷繁复杂的工作，具体进程如下表：</p>
+<table>
+<thead>
+<tr>
+<th>进程</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser进程</td>
+<td>负责各个标签页的协调控制，网络请求和绘制Bitmap到界面上</td>
+</tr>
+<tr>
+<td>插件进程</td>
+<td>每种类型的插件对应一个进程，仅当使用该插件时才创建该进程</td>
+</tr>
+<tr>
+<td>GPU进程</td>
+<td>最多只有一个，用于3D绘制</td>
+</tr>
+<tr>
+<td>Renderer进程</td>
+<td>控制每个标签页的页面渲染(最终在内存上生成Bitmap)，脚本执行，事件处理，定时器和异步Http请求</td>
+</tr>
+</tbody>
+</table>
+<p><strong>多线程的浏览器内核</strong></p>
+<p>每个标签页(Renderer进程)都可以看做是浏览器的内核进程，这个进程是多线程的，包括如下几个进程：</p>
+<ol>
+<li>GUI渲染线程：负责解析HTML/CSS，构建DOM树/CSS规则树和render树，布局渲染，处理Reflow(回流)和Repaint(重绘)。</li>
+<li>JavaScript引擎线程：负责解释执行JavaScript脚本，我们说JS是单线程的就是指这个JavaScript引擎线程。</li>
+<li>事件触发线程：该线程不属于JS引擎线程，用来控制事件循环，当对应的事件(如鼠标事件)符合条件被触发时，该线程会把事件添加到待处理事件队列的尾部，等待JS引擎线程的处理。</li>
+<li>定时触发器线程：setInterval和setTimeout所在线程，当计时完毕时会将要处理的逻辑置于事件队列中，等待JS引擎线程的处理。</li>
+<li>异步Http请求线程：用于AJAX请求，当检测到状态(readyState、status)发生变化时，如果设有回调函数，该线程就会产生状态变换事件，将这个回调函数放入事件队列中，等待JS引擎处理。</li>
+</ol>
+<p>注意：GUI渲染线程与JavaScript引擎线程互斥。当JS引擎线程执行时，GUI线程会被挂起，GUI更新会被保存到事件队列中等待JS引擎线程空闲时执行。如果JS引擎线程执行事件过长，会造成页面渲染不连贯，导致页面渲染加载阻塞。</p>
+<blockquote>
+<p>进程是某一时间执行的具体任务，线程是任务分派后执行的具体单位，一个进程可以有多个线程。进程就像一个项目，线程就像完成项目的人。进程是资源分配的最小单位，线程是CPU调度的最小单位。</p>
+</blockquote>
+<h2 id="从URL到网络请求"><a href="#从URL到网络请求" class="headerlink" title="从URL到网络请求"></a>从URL到网络请求</h2><p>当我们打开空白标签页时，浏览器就创建一个新的Renderer进程。在这之后我们键入URL按下回车，浏览器的Browser主进程会开辟一个网络请求线程用于网络请求。其具体流程如下：</p>
+<p><strong>解析URL</strong>：解析URL的协议名，域名，端口号，路径，查询参数(?)，哈希值(#)等。</p>
+<p><strong>DNS解析</strong>：首先读取DNS缓存，如果有相应的浏览器缓存或本地缓存，则直接使用缓存，不进行DNS解析。如果没有相应的DNS缓存，则进行DNS解析，查询出域名对应的IP地址。</p>
+<p><strong>建立TCP/IP连接</strong>：通过三次握手建立与服务器的连接(长连接或短连接)，在此之后发送具体的请求到服务器，等待服务器的响应。浏览器根据请求作出应答，返回数据包。最后当关闭连接时，双方进行通过四次挥手断开连接。</p>
+<h2 id="TCP-IP五层网络协议"><a href="#TCP-IP五层网络协议" class="headerlink" title="TCP/IP五层网络协议"></a>TCP/IP五层网络协议</h2><table>
+<thead>
+<tr>
+<th>分层</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层(HTTP/SMTP/DNS等)</td>
+<td>用于支持网络应用，如超文本传输，邮件传输，DNS解析等</td>
+</tr>
+<tr>
+<td>传输层(TCP/UDP)</td>
+<td>用于提供端到端的数据传输服务，分为有连接的TCP协议和无连接的UDP协议</td>
+</tr>
+<tr>
+<td>网络层(IP/ARP)</td>
+<td>用于提供主机间的逻辑通信，IP协议用于将域名解析成IP地址，ARP协议用于将IP地址解析成物理地址</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>数据链路层传输的协议数据单元是帧，会将数据包拆分成帧后传输</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>物理层负责将比特流在节点之间传输，即负责物理传输</td>
+</tr>
+</tbody>
+</table>
+<h2 id="后台与前端的交互"><a href="#后台与前端的交互" class="headerlink" title="后台与前端的交互"></a>后台与前端的交互</h2><p><strong>负载均衡</strong></p>
+<p>用户发起的请求会指向调度服务器，然后调度服务器根据实际的调度算法，分配不同的请求给对应集群中的服务器执行，然后调度器等待实际服务器的HTTP响应，并将它返回给用户。</p>
+<p><strong>HTTP报文</strong></p>
+<p>HTTP报文一般包括通用头部，请求/响应头，请求/响应体。通用头部包括Request URL、Request Method、Status Code和Remote Address。</p>
+<table>
+<thead>
+<tr>
+<th>status</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>请求成功，所请求的资源发送到客户端</td>
+</tr>
+<tr>
+<td>304</td>
+<td>请求的资源未被修改，请客户端使用本地缓存</td>
+</tr>
+<tr>
+<td>400</td>
+<td>客户端请求有误</td>
+</tr>
+<tr>
+<td>401</td>
+<td>请求未被授权</td>
+</tr>
+<tr>
+<td>403</td>
+<td>禁止访问</td>
+</tr>
+<tr>
+<td>404</td>
+<td>资源未找到</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td>503</td>
+<td>服务不可用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>cookie、sessionStorage、localStorage和session</strong></p>
+<ul>
+<li>cookie是网站为了标识用户身份信息而存储在用户本地终端上的数据(通常为加密存储)。cookie数据始终在同源策略条件下的http请求中携带(即使不需要),即会在浏览器和服务器中来回传递。cookie存储的数据大小不能超过4k。</li>
+<li>storage范畴包括sessionStorage和localStorage。</li>
+<li>sessionStorage和localStorage不会自动把数据发送给服务器，仅在本地存储。sessionStorage和localStorage的存储大小很大，可以达到5M或更大。</li>
+<li>localStorage存储持久数据，浏览器关闭后数据不丢失/sessionStorage数据在浏览器关闭后自动删除/cookie在设置的过期日期前一直有效，即使关闭浏览器。</li>
+<li>session存储在服务器端， session的运行依赖session id， session id存储在cookie中。</li>
+</ul>
+<p><strong>gzip</strong></p>
+<p>gzip的压缩格式效率可达70%，gzip一般由阿帕奇等web服务器开启，开启以后文件均会采取这种压缩格式。</p>
+<p><strong>长连接和短连接</strong></p>
+<ul>
+<li>在HTTP1.0中默认使用短连接，也就是说浏览器每进行一次HTTP操作，就建立一次连接，任务结束就断开连接。</li>
+<li>自HTTP1.1起默认使用长连接(Connection: keep-alive)，在长连接的情况下，当一个网页打开完成后客户端与服务器之间的TCP连接也不会关闭，如果客户端再次请求这个服务器的资源，会继续使用这条已经建立的TCP连接。keep-alive不会永远保持，它会有一个持续时间，一般在服务器中配置，此外，长连接需要客户端和服务器都支持时才会生效。</li>
+</ul>
+<p><strong>HTTP2.0</strong></p>
+<p>HTTP2.0的规范具有以下特性：</p>
+<ol>
+<li>多路复用：一个TCP连接可以请求多个资源</li>
+<li>首部压缩：压缩HTTP头部，减少体积</li>
+<li>二进制分帧：提高传输性能</li>
+<li>服务器推送：服务器可以主动发送资源到客户端</li>
+<li>请求优先级：如果请求被赋予优先级，服务器就可以根据优先级来处理请求</li>
+</ol>
+<p><strong>HTTPS</strong></p>
+<p>HTTPS是安全版的HTTP，其在请求之前，会建立ssl连接，保证接下来的通信都是加密的，无法被轻易截取分析。</p>
+<p><strong>浏览器缓存</strong><br>缓存可以划分为强缓存(200 from cache)和协商(弱)缓存(304)。强缓存指如果浏览器判定本地缓存未过期，则直接使用，不需发起Http请求；弱缓存指浏览器向服务器发起Http请求，服务器返回304状态码，告诉浏览器请求的资源未被修改，请浏览器使用本地缓存。</p>
+<h2 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h2><ol>
+<li>加载解析HTML，开始构建DOM树。</li>
+<li>遇到CSS外链，异步加载解析CSS，构建CSS规则树。</li>
+<li>遇到script标签，如果是普通JS标签则同步加载，阻塞页面渲染，如果标签上有defer/async属性则异步加载JS资源。设置defer的JS资源会在DOMContentLoaded事件之前执行；设置了async的JS资源加载完就执行。</li>
+<li>合并DOM树和CSS规则树生成render树。</li>
+<li>布局render树，计算各元素的尺寸、位置等。</li>
+<li>渲染render树，将内存上的Bitmap绘制到屏幕上。</li>
+</ol>
+<blockquote>
+<p>回流和重绘：DOM结构发生改变/元素的位置、结构、尺寸发生改变/窗口放缩/获取某些属性(如offset、scoll、width等)等会引发回流；元素一些样式发生的改变不会对布局产生影响时会产生重绘，如背景色，文字颜色等。回流的成本高昂，应该尽量避免回流。回流一定重绘，重绘不一定回流。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浏览器是多进程的，包括负责协调主控的Browser主进程，第三方插件进程，最多一个的用于3D绘制的GPU进程，用于页面渲染、脚本执行、事件处理等的Renderer进程等。每个页面都是一个单独的Renderer进程，Renderer进程包括渲染线程、JS引擎线程、事件触发线程、定时器线程和异步HTTP请求线程。当新建一个分页时，浏览器会新建一个Renderer进程。<br>浏览器主进程首先根据该页面输入的URL开辟一个网络请求线程。该线程首先会解析URL，如果输入的域名有缓存，则直接使用缓存，如果没有则通过DNS解析出IP地址。然后通过TCP/IP三次握手建立连接，向服务器发送请求包。服务器根据请求做出应答，返回应答包，浏览器Renderer进程根据返回的数据进行解析处理，完成布局，在内存上生成Bitmap，最后交给浏览器主线程完成绘制。当TCP/IP断开连接时，客户端与服务器通过四次挥手断开连接。<br>其中页面渲染的过程是浏览器解析HTML文档，通过标签构建DOM树，遇到CSS链接会异步加载CSS文档，构建CSS规则树。解析文档的过程中遇到普通js资源会阻塞加载，遇到带有defer/async的js外链会异步加载。当DOM树和CSS规则树均构建完成时，会合并两个树生成render树。再接下来会布局render树，计算各元素的尺寸、位置等数据。最后绘制render树，页面加载完成。</p>
+
     </div>
 
     <div class="post-footer">
@@ -243,7 +405,7 @@
     <div class="widget">
         <h3 class="title">Table of Contents</h3>
         
-            <p>暂无目录</p>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器"><span class="toc-text">浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从URL到网络请求"><span class="toc-text">从URL到网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP五层网络协议"><span class="toc-text">TCP/IP五层网络协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台与前端的交互"><span class="toc-text">后台与前端的交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面渲染"><span class="toc-text">页面渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
         
     </div>
 </aside>
