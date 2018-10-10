@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Web安全的攻防集锦 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/javascript.png">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://ronniehu.oss-cn-beijing.aliyuncs.com/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Ronnie Hu'>
+            <img src="/img/zero.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>
+            
+                 <img src="/img/slogan.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/前端/"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/工具/"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/综合/"><i class="fa "></i>综合</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/随笔/"><i class="fa "></i>随笔</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Web安全的攻防集锦">
+            
+	            Web安全的攻防集锦
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/前端" title='前端'>
+                        前端
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/09</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>在<a href="https://zh.wikipedia.org/wiki/%E9%9C%80%E6%B1%82%E5%B1%82%E6%AC%A1%E7%90%86%E8%AE%BA" target="_blank" rel="noopener">马斯洛需求金字塔</a>中，继生理需求(如事物、水、空气、睡眠等)后的第二层需求就是安全需求(如人身安全、生活稳定、身体健康等)。对于Web开发来说，Web安全同样是产品的一项最基础的需求。本文尝试总结一些常见的Web安全的攻防策略，供同学们参考。</p>
+<h2 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h2><p>跨站脚本攻击(Cross Site Script)的原理是攻击者恶意地向Web页面里插入可执行网络脚本代码，当用户浏览该网页时，嵌入其中的脚本代码就会执行，达到窃取用户信息，侵犯用户隐私的目的。XSS的攻击类型很多，主要可分为如下几类。</p>
+<h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>反射型XSS指攻击者发送给用户带有恶意脚本代码的参数的URL，当用户打开该URL时，特有的恶意代码会被解释执行，从而盗取Cookie等用户隐私信息。</p>
+<p>反射型XSS攻击具有如下特点：</p>
+<ol>
+<li>即时性，不经过后台存储，直接通过HTTP请求就能完成一次攻击。</li>
+<li>攻击者需要诱骗用户点击该URL。</li>
+<li>反馈率低，很难发现和修复。</li>
+</ol>
+<p>为了防止反射型XSS攻击带来的安全隐患，我们需要确保：</p>
+<ul>
+<li>Web页面渲染的数据必须来自于服务端。</li>
+<li>尽量避免从URL中获取数据进行直接使用。</li>
+<li>尽量避免使用eval()/new Function()/document.write()/document.createElement()等可执行字符串的方法。</li>
+<li>前端渲染时对任何字段都进行转义处理。</li>
+</ul>
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>存储型XSS漏洞指攻击者通过表单提交等手段将恶意代码持久化存储在后台的数据库中，其他用户在访问该站点时，后台从数据库中提取数据发送给前端，恶意代码被执行，用户隐私信息会被窃取。</p>
+<p>此存储型XSS攻击实现较困难，需满足以下几个条件：</p>
+<ol>
+<li>POST请求提交的表单后端没有转义处理就直接存入数据库；</li>
+<li>后台从数据库中提取数据未做转义处理就直接发送给前端；</li>
+<li>前端拿到数据后没有做转义处理就直接解释、执行、渲染。</li>
+</ol>
+<p>存储型XSS攻击具有持久性、危害面积巨大等特点，为了防止存储型XSS攻击，需要前端和后台的共同努力：</p>
+<ul>
+<li>后台在入库之前不相信任何前端数据，将所有字段统一转义处理。</li>
+<li>后台在将数据发送给前端前进行统一的转义处理。</li>
+<li>前端获取后台数据时应不相信任何后台数据，对后台数据进行统一的转义处理。</li>
+</ul>
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>CSRF(Cross Site Request Forgery)，是一种挟持用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。与XSS攻击相比，XSS利用的是用户对指定网站的信任，CSRF利用的是网站对用户浏览器的信任。</p>
+<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h3><p>用户使用浏览器登陆了受信站点A并在浏览器中产生了Cookie，用户在没有登录出站点A的情况下访问了危险站点B，此时站点B要求访问站点A，发送带有A站点Cookie的请求，站点B就可以通过本次访问做很多坏事，如转账等。</p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/websafety/csrf.jpg" alt="CSRF"></p>
+<p>完成CSRF需要具备的条件：</p>
+<ol>
+<li>用户登录了站点A，并产生了Cookie；</li>
+<li>在用户没有登出站点A的情况下访问了攻击者提供的危险站点B，并且B要求访问站点A。</li>
+<li>站点A没有做任何CSRF攻击的防御措施。</li>
+</ol>
+<h3 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h3><ul>
+<li><p>检验Referer字段：在HTTP请求头重有一个Referer字段，该字段用于表明请求来自于哪个地址，在处理敏感数据请求时，Referer字段应该和请求的字段位于同一域名下。</p>
+</li>
+<li><p>添加校验token：如果我们要求在进行敏感数据请求时，要求用户浏览器提供不保存在Cookie中，并且攻击者无法伪造的数据作为校验，那么攻击者就无法再进行CSRF攻击。</p>
+</li>
+</ul>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>SQL注入是一种同样非常常见的攻击方式，可以通过SQL注入进行获取数据库的敏感数据，添加用户，导出文件等一系列恶意操作。</p>
+<p>造成SQL注入的原因是后台没有有效地过滤用户的输入，使攻击者成功的向服务器提交恶意的SQL查询代码，数据执行了错误的查询语句，最终使攻击者能进行一系列非法操作。</p>
+<p><strong>预防SQL的基本措施</strong></p>
+<ol>
+<li>严格限制Web应用的数据库权限，给用户提供能满足其工作需求的最低权限，最大限度减少SQL攻击对数据库的危害。</li>
+<li>对用户提交的数据进行验证，检验其是否符合预期。</li>
+<li>对进入数据库的特殊字符进行转义处理。</li>
+<li>在上线前使用专业的SQL注入检测工具进行检测。</li>
+<li>避免在网页输出SQL错误等细致的错误信息。</li>
+</ol>
+<h2 id="DDoS攻击"><a href="#DDoS攻击" class="headerlink" title="DDoS攻击"></a>DDoS攻击</h2><p>DDoS(Distributed Denial of Service)又称分布式拒绝服务，其原理是利用大量的网络请求造成资源过载，使服务不可用。举个例子就像我们乘车到市中心去吃饭，但是路上堵车，根本寸步难行。</p>
+<p>DDoS攻击严格来说不属于安全问题，而是一种流氓行为，攻防双方互相伤害，攻击者同样需要调用大量的资源去进行网络请求，进行这种攻击的原因可能有以下几种可能：</p>
+<ul>
+<li>和你有仇，就是要干你，下次还干你。</li>
+<li>敲诈勒索，不给钱就继续干你。</li>
+<li>胁迫你购买他们的服务，不买他们的防火墙等服务就继续干你。</li>
+</ul>
+<p>防御DDoS攻击的方法通常有入侵检测，流量过滤和多重过滤几种，旨在将阻塞网络带宽的流量过滤，而正常的流量可正常通过。</p>
+<h2 id="流量劫持"><a href="#流量劫持" class="headerlink" title="流量劫持"></a>流量劫持</h2><p>流量劫持指我们想访问目标站点A的内容，但是却得到了站点B的内容或者站点A的内容和部分其他内容。流量劫持分DNS劫持和HTTP劫持两种。</p>
+<h3 id="DNS劫持"><a href="#DNS劫持" class="headerlink" title="DNS劫持"></a>DNS劫持</h3><p>DNS劫持指当用户通过域名访问一个站点时，被篡改的DNS服务器返回了一个恶意钓鱼网站的IP地址，用户被劫持到了该恶意钓鱼网站，输入的用户信息会被泄漏。就像我们想打车去本市中心的一家饭店吃饭，但是司机把我们送到了市郊的驾校。出现DNS劫持可能是电脑感染了病毒或者是运营商提供了恶性服务，当我们出现了DNS劫持的问题时，需要对本机进行病毒查杀，如果本机没有问题，则可以取证后向ISP或工信部进行投诉。</p>
+<h3 id="HTTP劫持"><a href="#HTTP劫持" class="headerlink" title="HTTP劫持"></a>HTTP劫持</h3><p>HTTP劫持指当用户访问某个站点时，攻击者截获了站点返回的数据内容，篡改了部分内容后返回给用户，轻则插入小广告，重则直接篡改成钓鱼网站骗取用户隐私信息。使用HTTPS进行加密传输能够规避这种HTTP劫持问题。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/10/06/计算机网络知识体系/" class="next-post btn btn-default" title='计算机网络知识体系'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">计算机网络知识体系</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS攻击"><span class="toc-text">XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反射型XSS"><span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储型XSS"><span class="toc-text">存储型XSS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF"><span class="toc-text">CSRF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击原理"><span class="toc-text">攻击原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防范措施"><span class="toc-text">防范措施</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入"><span class="toc-text">SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DDoS攻击"><span class="toc-text">DDoS攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流量劫持"><span class="toc-text">流量劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS劫持"><span class="toc-text">DNS劫持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP劫持"><span class="toc-text">HTTP劫持</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
