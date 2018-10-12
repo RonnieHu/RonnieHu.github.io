@@ -259,6 +259,12 @@
 </table>
 <h2 id="后台与前端的交互"><a href="#后台与前端的交互" class="headerlink" title="后台与前端的交互"></a>后台与前端的交互</h2><p><strong>负载均衡</strong></p>
 <p>用户发起的请求会指向调度服务器，然后调度服务器根据实际的调度算法，分配不同的请求给对应集群中的服务器执行，然后调度器等待实际服务器的HTTP响应，并将它返回给用户。</p>
+<p><strong>JSON</strong></p>
+<p>JSON是一种轻量级的数据交换格式,通常用于与服务器交换数据。相较上一代数据交换格式XML,具有易于读写,占用带宽小等优点。</p>
+<ul>
+<li>JSON.parse(data)可以将json格式的data转化成JavaScript对象; </li>
+<li>JSON.stringify(data)将JavaScript对象格式的data转化成JSON。</li>
+</ul>
 <p><strong>HTTP报文</strong></p>
 <p>HTTP报文一般包括通用头部，请求/响应头，请求/响应体。通用头部包括Request URL、Request Method、Status Code和Remote Address。</p>
 <table>
@@ -303,6 +309,7 @@
 </tr>
 </tbody>
 </table>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/statusCode.png" alt="status code"></p>
 <p><strong>cookie、sessionStorage、localStorage和session</strong></p>
 <ul>
 <li>cookie是网站为了标识用户身份信息而存储在用户本地终端上的数据(通常为加密存储)。cookie数据始终在同源策略条件下的http请求中携带(即使不需要),即会在浏览器和服务器中来回传递。cookie存储的数据大小不能超过4k。</li>
