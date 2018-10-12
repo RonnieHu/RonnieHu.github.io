@@ -333,11 +333,12 @@
 <h2 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h2><ol>
 <li>加载解析HTML，开始构建DOM树。</li>
 <li>遇到CSS外链，异步加载解析CSS，构建CSS规则树。</li>
-<li>遇到script标签，如果是普通JS标签则同步加载，阻塞页面渲染，如果标签上有defer/async属性则异步加载JS资源。设置defer的JS资源会在DOMContentLoaded事件之前执行；设置了async的JS资源加载完就执行。</li>
+<li>遇到script标签，如果是普通JS标签则同步加载执行，阻塞页面渲染，如果标签上有defer/async属性则异步加载JS资源。设置defer的JS资源会在DOMContentLoaded事件之前执行；设置了async的JS资源加载完就执行。</li>
 <li>合并DOM树和CSS规则树生成render树。</li>
 <li>布局render树，计算各元素的尺寸、位置等。</li>
 <li>渲染render树，将内存上的Bitmap绘制到屏幕上。</li>
 </ol>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/scriptLabel.jpg" alt="script label"></p>
 <p><strong>相关知识点</strong></p>
 <ul>
 <li><p>onload和DOMContentLoaded：DOMContentLoaded指DOM加载完成，不包括样式表、图片，可能此时带有async的js资源没有加载解析完成。onload触发时所有的DOM，样式表，脚本，图片均已加载完成。</p>
