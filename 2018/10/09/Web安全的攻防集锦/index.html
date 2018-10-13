@@ -211,7 +211,7 @@
 </ul>
 <h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>CSRF(Cross Site Request Forgery)，是一种挟持用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。与XSS攻击相比，XSS利用的是用户对指定网站的信任，CSRF利用的是网站对用户浏览器的信任。</p>
 <h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h3><p>用户使用浏览器登陆了受信站点A并在浏览器中产生了Cookie，用户在没有登录出站点A的情况下访问了危险站点B，此时站点B要求访问站点A，发送带有A站点Cookie的请求，站点B就可以通过本次访问做很多坏事，如转账等。</p>
-<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/websafety/csrf.jpg" alt="CSRF"></p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/csrf.jpg" alt="CSRF"></p>
 <p>完成CSRF需要具备的条件：</p>
 <ol>
 <li>用户登录了站点A，并产生了Cookie；</li>
