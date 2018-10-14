@@ -185,7 +185,7 @@
 <p>于是Linus花了两周时间自己用C语言写了一个分布式版本控制工具，这就是Git，在一个月之内的时间，Linux操作系统的源码就交给Git管理了。Git迅速成为最流行的分布式版本控制工具。2008年Github网站上线，其为开源项目提供免费的代码存储，无数开源项目迁移至Github，如React，TypeScript等。</p>
 <p>为什么Git是分布式版本控制工具？它和集中式版本控制工具SVN有什么不同呢？集中式版本控制的版本库是集中存放在中央服务器的，工作时必须首先从中央服务器获取最新版本，工作结束后再把自己的劳动成果推送给中央服务器。分布式服务器没有中央服务器，每个人电脑上都是一个完整的版本库，工作成果首先会直接存储在本地仓库，然后可以推送给远程仓库。相较集中式版本控制，分布式版本控制具有更安全，更便捷等的优点。</p>
 <h2 id="Git的仓库控制"><a href="#Git的仓库控制" class="headerlink" title="Git的仓库控制"></a>Git的仓库控制</h2><p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/git.jpg" alt="Git"></p>
-<p><strong>工作目录</strong>：我们进行代码编辑工作的工作文件/文件夹称为工作目录。<br><strong>暂存区</strong>：代码管理时首先使用<code>git add &lt; file &gt;</code>命令将代码存放到暂存区，<code>git add .</code>可以将工作目录所有文件都存放到暂存区。<br><strong>本地仓库</strong>：然后使用<code>git commit &lt; file &gt; -m &#39;some info here&#39;</code>将代码上传到本地仓库。<br><strong>远程仓库</strong>：使用<code>git push</code>推送代码到远程仓库，它是代码托管的远程平台，用于存放最终版代码。</p>
+<p><strong>工作目录</strong>：我们进行代码编辑工作的工作文件/文件夹称为工作目录。<br><strong>暂存区</strong>：代码管理时首先使用<code>git add &lt; file|. &gt;</code>命令将代码存放到暂存区。<code>.</code>指代所有文件。<br><strong>本地仓库</strong>：然后使用<code>git commit -m &#39;some info here&#39;</code>将代码上传到本地仓库。<br><strong>远程仓库</strong>：使用<code>git push</code>推送代码到远程仓库，它是代码托管的远程平台，用于存放最终版代码。</p>
 <p><strong>常用Git辅助命令</strong></p>
 <table>
 <thead>
@@ -227,8 +227,8 @@
 </table>
 <p><strong>Git的回退操作</strong></p>
 <ul>
-<li>工作区回退：当想放弃工作修改/编辑的内容时，使用<code>git checkout -- &lt; file &gt;</code>。</li>
-<li>暂存区回退：当想放弃提交到暂存区的文件时，使用<code>git reset HEAD &lt; file &gt;</code>，如果想再放弃工作区的修改/编辑，使用1的操作。</li>
+<li>工作区回退：当想放弃工作修改/编辑的内容时，使用<code>git checkout -- &lt; file|. &gt;</code>。</li>
+<li>暂存区回退：当想放弃提交到暂存区的文件时，使用<code>git reset HEAD &lt; file|. &gt;</code>，如果想再放弃工作区的修改/编辑，使用1的操作。</li>
 <li>本地仓库回退：当放弃本地仓库的文件时，使用<code>git reset --(hard|mixed|soft) (HEAD\^+|HEAD~number|commit-id)</code>。<br>其中hard参数回退全部，包括HEAD、index和working tree；mixed回退部分，包括HEAD和index；soft仅回退HEAD。<br>参数number和commit-id可以通过<code>git reflog</code>找到，commit-id不需要拼写完全，只需要开头几位字符即可。</li>
 </ul>
 <p><strong>Github和.gitignore</strong></p>
