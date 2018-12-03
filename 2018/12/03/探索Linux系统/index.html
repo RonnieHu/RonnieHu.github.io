@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Tag: 前端 | Hexo</title>
+<title>探索Linux系统 | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -132,79 +132,120 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <h3> 
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="探索Linux系统">
+            
+	            探索Linux系统
+            
+        </h1>
+        <div class="post-meta">
     
-        前端 
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
     
     
-</h3>
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/综合" title='综合'>
+                        综合
+                    </a>
+                
+            
+        </span>
+    </span>
+    
 
-    <article class="post">
+    
         
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/2018/10/09/Web安全的攻防集锦/">Web安全的攻防集锦</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年10月09日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                
-                    在马斯洛需求金字塔中，继生理需求(如事物、水、空气、睡眠等)后的第二层需求就是安全需求(如人身安全、生活稳定、身体健康等)。对于Web开发来说，Web安全同样是产品的一项最基础的需求。本文尝试总结一些常见的Web安全的攻防策略，供同学...
-                
-            </p> 
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/03</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>我们知道Linux是一个类Unix的操作系统，而Unix是贝尔实验室的一个研究项目，加州大学伯克利分校对其重新实现后的版本称为BSD(Mac OS部分基于BSD)。Linux是对Unix的重新实现，可以看做Unix的一个变体，但从开放形式和最终源码看，Linux不属于BSD和AT&amp;T(贝尔实验室)风格的任何一种，因此严格来说，Linux是有别于Unix的另一种操作系统。</p>
+<p>Linux基于GPL协议，该协议是GNU计划的一部分，此处向开源界致敬、向开源精神致敬！Linux版本众多，其中桌面常使用Ubuntu和Debian，服务器常使用Red Hat和Fedora。</p>
+<p>常见软件包格式：.rpm(RedHat Package Manager)和.deb(for Debian &amp; Ubuntu)；常见包管理工具APT(Advanced package Tool，可以管理rpm和deb)和yum(yum只用于rpm)。</p>
+<blockquote>
+<p>在输入文件名/命令时，只需输入前面几个字符，然后按Tab键，shell会自动补齐。如果前面字符开头的文件/命令不止一个，可以连续按两次Tab，shell会给出所有键入字符开头的文件。</p>
+</blockquote>
+<p>Linux启动过程：BIOS上电自检 =&gt; 引导程序装载 =&gt; 内核初始化 =&gt; 启动systemd(所有进程之父)</p>
+<p>Bash命令：用户管理 | 软件包管理 | 进程管理 | 文件管理 | 磁盘管理 | 其他</p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/sys_dic.jpg" alt="sytem_dictionary"></p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/cmd1.jpg" alt="CMD1"></p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/cmd2.jpg" alt="CMD2"></p>
+<p>vi模式：命令行模式/文本输入模式/末行模式</p>
+<p>命令行模式：无论何时，按Esc即可进入命令行模式。<br>文本输入模式：插入命令i/附加命令a/打开命令o/修改命令r/替代命令s都可以进入文本输入模式。若想回到命令行模式，按Esc。<br>末行模式：在命令行模式下输入:进入末行模式。:q退出/:wq保存后退出/:q!不保存退出</p>
+<p>Shell是解释器而不是语言，务必时刻注意Shell的代码规范。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/2018/09/23/从输入URL到页面渲染的完整知识体系/">从输入URL到页面渲染的完整知识体系</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年09月23日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                
-                    作为一名工程师需要有自己完整的知识体系，能够运用知识和经验解决问题。在前端的世界里，工程师需要了解浏览器、计算机网络、数据结构与算法、web安全等方方面面的知识内容。本文尝试通过从输入URL到页面渲染的全过程，梳理出前端工程知识体系的...
-                
-            </p> 
+        <div>
+            
         </div>
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/2018/09/09/从编程语言的角度看ES6+/">从编程语言的角度看ES6+</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年09月09日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                
-                    1995年，JavaScript之父Brendan Eich用十天的时间设计了这门动态脚本语言。经过两次浏览器大战，二十余年的发展，JavaScript早已在web前端领域占统治地位，其势力向后端、桌面应用、App开发等领域迅速扩张。...
-                
-            </p> 
-        </div>
-    </article>
- 
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/10/24/操作系统知识体系/" class="next-post btn btn-default" title='操作系统知识体系'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">操作系统知识体系</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
 
 
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
 
 
 
@@ -212,62 +253,14 @@
 
                 </main>
                 
-                    
-    <aside class="col-md-4 sidebar">
-        
-        
-    <div class="widget notification">
-        <h3 class="title">Notification</h3>
-        <div>
-            <p>
-欢迎各位同学一起交流，分享CS知识和经验
-<br/>
-个人Github：<a href="https://github.com/RonnieHu" target='blank'>RonnieHu</a>
-</p>
-        </div>
-    </div>
-
-        
-        
+                    <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
-      <h3 class="title">Social</h3> 
-        <div class="content social">
-            
-	            <a href="mailto:ronniehu981228@163.com" rel="external nofollow" title="邮箱" target="_blank">
-			    	<i class="envelope-o fa fa-envelope-o"></i>
-			    </a>
-            
-	            <a href="<alert>ronniehu981228@163.com</alert>" rel="external nofollow" title="微信" target="_blank">
-			    	<i class="weixin fa fa-weixin"></i>
-			    </a>
-            
-        </div>
+        <h3 class="title">Table of Contents</h3>
+        
+            <p>暂无目录</p>
+        
     </div>
-
-
-        
-        
-
-        
-        
-    <div class="widget">
-      <h3 class="title">Archives</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">2018年12月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">2018年10月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">2018年09月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">2018年08月</i></a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-
-        
-        
-  <div class="widget">
-    <h3 class="title">Tag Cloud</h3>
-    <div class="content tag-cloud">
-        <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/工具/" style="font-size: 13.33px;">工具</a> <a href="/tags/综合/" style="font-size: 20px;">综合</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
-    </div>
-  </div>
-
-
-        
-    </aside>
+</aside>
 
                 
             </div>
@@ -304,8 +297,6 @@
     </div>
 </div>
 
-
-	<script src="/js/search.js?rev=@@hash"></script>
 
 
 <script src="/js/app.js?rev=@@hash"></script>
