@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>理解Webpack | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/javascript.png">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://ronniehu.oss-cn-beijing.aliyuncs.com/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Ronnie Hu'>
+            <img src="/img/zero.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>
+            
+                 <img src="/img/slogan.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/工具/"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/综合/"><i class="fa "></i>综合</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/随笔/"><i class="fa "></i>随笔</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="理解Webpack">
+            
+	            理解Webpack
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/工具" title='工具'>
+                        工具
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/16</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>在前端工程化的今天，前端开发的流程日趋规范化、标准化，而在其构建发布的过程中，模块化管理工具Webpack的作用举足轻重。Webpack中一切皆模块，按需加载是其核心原理，在我们构建SPA(Single Page Application)时就能充分感受到Webpack的优势。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>entry</strong>：入口，Webpack执行构建的第一步从entry开始。Webpack会从配置的entry开始递归的找出所有依赖的模块。<br><strong>output</strong>: 输出结果，指示Webpack输出打包后的文件的文件名和文件路径。<br><strong>loader</strong>：模块转换器，用于把模块原内容按照需求转化成新内容。如babel-loader、url-loader等。<br><strong>plugins</strong>：扩展插件，在Webpack构建流程中的特定时刻会发布对应的事件，插件可以监听这些事件的发生，在特定时刻做特定的事情。如extract-text-webpack-plugin等。<br><strong>module</strong>：模块，在Webpack中一切皆为模块，一个模块对应着一个文件。<br><strong>chunk</strong>：代码块，一个chunk由多个模块组合而成，用于代码合并与分割。一个entry和其所有依赖的module被分到一个组也就是一个chunk。</p>
+<p><strong>概述</strong>：Webpack启动后会从entry里的入口文件开始递归解析entry依赖的所有module。每找到一个module，就会根据配置的loader去找出对应的转换规则，对 module进行转换后，再解析出当前module依赖的module。这些模块会以entry为单位进行分组，一个entry和其所有依赖的module会被分到一个组，也就是一个chunk。最后Webpack会把所有chunk打包成文件输出到output路径里。在整个流程中Webpack会在恰当的时机执行plugin里定义的逻辑。</p>
+<h2 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h2><p>Webpack的运行过程是一个串行的过程，从开始构建到构建结束可分成三个阶段：</p>
+<ul>
+<li>初始化阶段，在该阶段启动构建，读取与合并配置参数，加载plugins，实例化Compiler。</li>
+<li>编译阶段，从entry起始，针对每个module串行调用对应的loader去翻译文件内容，再找到该module依赖的module，递归的进行编译处理。</li>
+<li>输出阶段，对编译后的module组合成chunk，把chunk转化成文件，输出到文件系统。</li>
+</ul>
+<p>细致过程：</p>
+<ol>
+<li>初始化参数：从配置文件和Shell语句中读取与合并参数，得到最终的参数。</li>
+<li>开始编译：用上一步得到的参数初始化Complier对象，加载所有配置的插件，执行对象的run方法开始执行编译。</li>
+<li>确定入口：根据配置中的entry找出所有的入口文件(可能有多个入口文件)。</li>
+<li>编译模块：从入口文件出发，调用相应的loader对模块进行编译，再找出该模块依赖的模块，然后递归本步骤直到所有入口依赖的文件都经过了本步骤的操作。</li>
+<li>完成模块编译：在经过第4步使用loader翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系。</li>
+<li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的chunk，再把每个chunk转化成一个单独的文件加入到输出列表，这步是可以修改输出内容最后的机会。</li>
+<li>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。</li>
+</ol>
+<h2 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h2><p>Webpack通过webpack.config.js配置相关参数。下面是一个简单的配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">const ExtractTextPlugin = require(&apos;extract-text-webpack-plugin&apos;)</span><br><span class="line">const HtmlPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    // 对象形式的entry为多入口配置，每个键值对代表一个chunk，键名即为chunk名 </span><br><span class="line">    entry : &#123;</span><br><span class="line">        // 为了找到index.js应返回config文件夹的上级目录</span><br><span class="line">        bundle : path.join(__dirname, &apos;/../src/index.js&apos;)  </span><br><span class="line">    &#125;,</span><br><span class="line">    output : &#123;</span><br><span class="line">        // 为了打包代码到根目录下，需要返回到config文件夹的上级目录</span><br><span class="line">        path : path.join(__dirname, &apos;/../dist/&apos;),</span><br><span class="line">        filename : &apos;[name].[chunkhash:8].js&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    mode : &apos;development&apos;,</span><br><span class="line">    devServer : &#123;</span><br><span class="line">        historyApiFallback : true,</span><br><span class="line">        port : 4000</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool : &apos;#eval-source-map&apos;,</span><br><span class="line">    module : &#123;</span><br><span class="line">        rules : [</span><br><span class="line">            &#123;</span><br><span class="line">                test : /\.jsx?$/,</span><br><span class="line">                use : &apos;babel-loader&apos;,</span><br><span class="line">                exclude : /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test : /\.(jpe?g|png|svg|gif)$/,</span><br><span class="line">                // 通过limit设置图片大小限制，图片大小低于8K会编成base64格式;通过name设置图片存储路径和图片名</span><br><span class="line">                use : &apos;url-loader?limit=8192&amp;name=./images/[name].[ext]&apos;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test : /\.scss$/,</span><br><span class="line">                use : ExtractTextPlugin.extract(&#123;</span><br><span class="line">                    use : [&apos;css-loader&apos;, &apos;sass-loader&apos;],</span><br><span class="line">                    fallback : &apos;style-loader&apos;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test : /\.css$/,</span><br><span class="line">                use : ExtractTextPlugin.extract(&#123;</span><br><span class="line">                    use : &apos;css-loader&apos;,</span><br><span class="line">                    fallback : &apos;style-loader&apos;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins : [</span><br><span class="line">        new HtmlPlugin(&#123;</span><br><span class="line">            title : &apos;BUNDLE&apos;,</span><br><span class="line">            // 为了让webpack-dev-server找到入口html文件，应该设置文件名为index.html</span><br><span class="line">            filename : &apos;index.html&apos;,</span><br><span class="line">            // 从当前的config文件夹内查找模板</span><br><span class="line">            template : __dirname + &apos;/template.html&apos;</span><br><span class="line">        &#125;),</span><br><span class="line">        new ExtractTextPlugin(&#123;</span><br><span class="line">            filename : &apos;bundle.css&apos;,</span><br><span class="line">            allChunks : true  //从所有chunk内提取css</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="理解loader"><a href="#理解loader" class="headerlink" title="理解loader"></a>理解loader</h2><p>每一个loader的职责都是单一的，只需要完成一种转换。如果一个源文件需要经历多次转换才能正常使用，就需通过多个loader去转换，在调用多个loader去转换一个文件时，loader会链式的顺序执行，第一个loader将会拿到需处理的源内容，下一个loader会承接第一个loader处理的结果继续处理，上一个loader处理后的结果会传给下一个接着处理，最后的loader将处理后的最终结果返回给Webpack。</p>
+<h2 id="plugins与事件流"><a href="#plugins与事件流" class="headerlink" title="plugins与事件流"></a>plugins与事件流</h2><p>在Webpack运行的生命周期中会发布很多事件，plugins通过订阅这些事件就可以在合适的时机介入到Webpack的工作中，使输出结果发生相应的改变。Webpack就像一条生产线，经过一系列的流程处理后将源文件转化成输出结果。这条生产线上的每个处理流程(loader)的职责都是单一的，多个流程之间存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。插件就像是插入到生产线中的一个功能，在特定的事件节点对生产线上的资源做处理。</p>
+<h2 id="Webpack上的优化过程"><a href="#Webpack上的优化过程" class="headerlink" title="Webpack上的优化过程"></a>Webpack上的优化过程</h2><ul>
+<li>压缩JS代码：可以使用webpack内置插件压缩JS代码。</li>
+<li>压缩CSS代码：css-loader内置cssnano，使用css-loader的minimize选项可以启动cssnano。如use : [‘style-loader’,’css-loader?minimize’]。</li>
+<li>生成雪碧图：可以webpack-spritesmith插件，将小图片/图标整合在一张图片上，减少网络请求。</li>
+<li>Tree Shaking：Tree Shaking能够剔除JavaScript中用不到的死代码。要让Tree Shaking正常工作的前提是提交给Webpack的JavaScript代码使用了ES6的模块化语法。</li>
+<li>提取公共代码。</li>
+<li>分割代码，实现按需加载(如前端路由)。</li>
+</ul>
+<p><strong>Webpack分析工具</strong>：</p>
+<ol>
+<li><a href="https://webpack.github.io/analyse/" target="_blank" rel="noopener">https://webpack.github.io/analyse/</a> </li>
+<li>plugin : webpack-bundle-analyzer</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Webpack是一个巨大的前端模块化管理平台，各种loader/plugin不胜枚举，我们很难完全掌握Webpack的各种配置设置和了解各种loader/plugin。我们学习Webpack的核心是理解其思想，在开发时不妨面向需求学习和拓展Webpack知识，这样非但能学习到更深层次的知识，而且可以使印象深刻、理解深入。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/11/24/操作系统知识体系/" class="pre-post btn btn-default" title='操作系统知识体系'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">操作系统知识体系</span>
+        </a>
+    
+    
+        <a href="/2018/11/13/Git与版本控制/" class="next-post btn btn-default" title='Git与版本控制'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Git与版本控制</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建流程"><span class="toc-text">构建流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-config-js"><span class="toc-text">webpack.config.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解loader"><span class="toc-text">理解loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#plugins与事件流"><span class="toc-text">plugins与事件流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Webpack上的优化过程"><span class="toc-text">Webpack上的优化过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
