@@ -229,7 +229,7 @@
 <ul>
 <li>工作区回退：当想放弃工作修改/编辑的内容时，使用<code>git checkout -- &lt; file|. &gt;</code>。</li>
 <li>暂存区回退：当想放弃提交到暂存区的文件时，使用<code>git reset HEAD &lt; file|. &gt;</code>，如果想再放弃工作区的修改/编辑，使用1的操作。</li>
-<li>本地仓库回退：当放弃本地仓库的文件时，使用<code>git reset --(hard|mixed|soft) (HEAD\^+|HEAD~number|commit-id)</code>。<br>其中hard参数回退全部，包括HEAD、index和working tree；mixed回退部分，包括HEAD和index；soft仅回退HEAD。<br>参数number和commit-id可以通过<code>git reflog</code>找到，commit-id不需要拼写完全，只需要开头几位字符即可。</li>
+<li>本地仓库回退：当放弃本地仓库的文件时，使用<code>git reset --(hard|mixed|soft) (HEAD^+|HEAD~number|commit-id)</code>。<br>其中hard参数回退全部，包括HEAD、index和working tree；mixed回退部分，包括HEAD和index；soft仅回退HEAD。<br>参数number和commit-id可以通过<code>git reflog</code>找到，commit-id不需要拼写完全，只需要开头几位字符即可。</li>
 </ul>
 <p><strong>Github和.gitignore</strong></p>
 <p>Github是全球最大同性交友社区，网站上有各种开源项目，供我们参考、学习和做出贡献。我们常常将公司的远程仓库设置在Github上，然后从远程仓库使用<code>git clone url</code>到本地进行开发。</p>
