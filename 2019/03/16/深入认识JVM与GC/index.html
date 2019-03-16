@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>深入认识JVM&amp;GC | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/javascript.png">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://ronniehu.oss-cn-beijing.aliyuncs.com/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Ronnie Hu'>
+            <img src="/img/zero.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>
+            
+                 <img src="/img/slogan.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/工具/"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/综合/"><i class="fa "></i>综合</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/随笔/"><i class="fa "></i>随笔</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="深入认识JVM&amp;GC">
+            
+	            深入认识JVM&amp;GC
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Web" title='Web'>
+                        Web
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/03/16</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>To learn the underlying mechanism of Java.</p>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p>Java虚拟机(Java Virtual Machine)简称JVM，是运行Java程序的必要机制。通过JVM，Java实现了最重要的特征可移植性(跨平台)，其原理是<em>.java文件会首先通过javac编译成</em>.class文件(字节码文件)，然后在执行时会将*.class文件解释成具体平台的机器指令(Linux/Windows/MacOS)再执行。同时JVM也是Java程序安全检测引擎，用于程序的安全监测。</p>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/jvm-arch.png" alt="JVM-ARCH"></p>
+<p>JVM主要分为四个部分：类加载器(Classloader Subsystem)、内存区(Runtime Data Area)、执行引擎(Execution Engine)和本地方法接口(Native Method Interface)。</p>
+<ol>
+<li>类加载器：把硬盘上的*.class文件加载到JVM的运行时数据区。</li>
+<li>内存区：指在Java程序执行时操作系统所分配的内存。</li>
+<li>执行引擎：用于执行字节码或本地方法。</li>
+<li>本地方法接口：调用C/C++实现的本地方法库并返回结果。</li>
+</ol>
+<p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/JVM-Architecture.png" alt="JVM-ARCH-Advance"></p>
+<p>内存区(Runtime Data Area)分为方法区(Method Area)、堆(Heap Memory)、Java虚拟机栈(JVM Stack)、程序计数器(Program Counter Register)和本地方法栈(Native Method Stack)五部分。其中方法区和堆由所有线程共享，而JVM栈、程序计数器、本地方法栈为线程私有使用。</p>
+<p><strong>方法区：</strong>方法区是各个线程共享的内存区域。它用于存储每个类的结构信息，如运行时常量池、静态变量、构造函数等信息。开发人员通过Class对象中的getName/isInstance等借助反射的方法获取的信息均来自于方法区。<br><strong>堆：</strong>堆是被各个线程共享的内存区域，是内存最大的部分。用于存储对象实例以及数组的区域，是GC管理的主要区域。JVM将堆分为New Generation和Old Generation两部分。<br><strong>程序计数器：</strong>程序计时器是私有的，每一个线程都一个自己的程序计数器。其占有一块较小的内存空间，用于存储当前线程所执行字节码的行号，以便当切换到该线程时能延上一次执行的状态继续执行。<br><strong>Java虚拟机栈：</strong>Java虚拟机栈是线程私有的。该栈与线程相同的生命周期，即同时创建和销毁。该栈由若干个栈帧组成，其用于记录方法执行时的局部变量表、操作栈、方法出口等，每个方法从被调用到执行完毕的过程就对应着一个栈帧在JVM栈中从入栈到出栈的过程。<br><strong>本地方法栈：</strong>本地方法栈同样是线程私有的。与Java虚拟机栈作用类似，Java虚拟机栈为Java虚拟机使用到的自定义方法服务，而本地方法栈为Java虚拟机使用到的本地方法服务。</p>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>Java相较C/C++而言一个巨大的优势是实现了自动内存管理，其垃圾回收机制是通过垃圾回收器(Garbage Collection, GC)实现的。GC是后台的守护进程，这是一个低优先级但可以根据内存使用情况动态调整优先级的进程，只有其在低到一定限度时才会执行来实现内存的回收，所以垃圾回收的时间不确定。</p>
+<p>与GC相关的是Runtime Data Area中的Heap和回收方法。在程序运行期间，所有对象实例和数组被存储在Heap中，当一个对象不再需要被引用时，就需要被回收，故GC主要在堆进行。</p>
+<p>常见GC方法：</p>
+<ul>
+<li>引用计数法：简单但速度较慢。</li>
+<li>停止复制法：效率低，需要的空间较大但是不会产生碎片。</li>
+<li>标记清除法：速度较快，占用空间较少，标记清除后会产生大量碎片。</li>
+</ul>
+<p>Java综合取舍了上述的GC方法，设计出了自适应的GC策略，采用了分代的处理方式，根据不同的环境和需求选择不同的处理方式。由于GC需要消耗一定的时间和资源，Java对对象的生命周期特征进行分析以后，选择了分代的方式来进行对对象的收集，即按照新生代、旧生代的方式GC，以尽可能减少GC对程序造成的影响。</p>
+<p><strong>新生代：</strong>任何新进入堆的对象会先存放在Eden Space，当其存放时间较长，经过GC而没有被清除时，就从Eden搬运到S0，再经过一段时间也没有被GC则再搬运到S1。新生代采用停止复制的GC方法。<br><strong>旧生代：</strong>S1中的对象经过一段时间后未被GC的对象会被搬运到旧生代。旧生代采用标记清除的GC办法。<br>注意Java SE8以后就没有永久代了。</p>
+<p>Remeber it!</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/12/20/数据结构与算法知识体系/" class="next-post btn btn-default" title='数据结构与算法知识体系'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">数据结构与算法知识体系</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM"><span class="toc-text">JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC"><span class="toc-text">GC</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
