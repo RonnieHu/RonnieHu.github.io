@@ -185,9 +185,9 @@
 <p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/jvm-arch.png" alt="JVM-ARCH"></p>
 <p>JVM主要分为四个部分：类加载器(Classloader Subsystem)、内存区(Runtime Data Area)、执行引擎(Execution Engine)和本地方法接口(Native Method Interface)。</p>
 <ol>
-<li>类加载器：把硬盘上的*.class文件加载到JVM的运行时数据区。</li>
+<li>类加载器：使用双亲委派模型(Parent Delegation Model)把硬盘上的*.class文件加载到JVM的运行时数据区，加载类时首先递归的检测父类加载器能否加载该类，直到父类加载器不能加载该类时由子类加载器执行加载。</li>
 <li>内存区：指在Java程序执行时操作系统所分配的内存。</li>
-<li>执行引擎：用于执行字节码或本地方法。</li>
+<li>执行引擎：用于执行字节码或本地方法，包括Interpreter，Garbage Collector和JIT Compiler。</li>
 <li>本地方法接口：调用C/C++实现的本地方法库并返回结果。</li>
 </ol>
 <p><img src="http://ronniehu.oss-cn-beijing.aliyuncs.com/JVM-Architecture.png" alt="JVM-ARCH-Advance"></p>
